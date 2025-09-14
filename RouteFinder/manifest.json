@@ -2,7 +2,7 @@
 "name": "Route Finder",
 "short_name": "Route Finder",
 "description": "Finds walking routes based on your location and preferences.",
-"start_url": "./index.html",
+"start_url": "index.html",
 "display": "standalone",
 "background_color": "#f5f5f5",
 "theme_color": "#2196f3",
