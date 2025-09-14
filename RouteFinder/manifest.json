@@ -1,0 +1,21 @@
+{
+"name": "Route Finder",
+"short_name": "Route Finder",
+"description": "Finds walking routes based on your location and preferences.",
+"start_url": "./route_finder.html",
+"display": "standalone",
+"background_color": "#f5f5f5",
+"theme_color": "#2196f3",
+"icons": [
+{
+"src": "https://www.google.com/search?q=https://placehold.co/192x192/000000/FFFFFF%3Ftext%3DRF",
+"sizes": "192x192",
+"type": "image/png"
+},
+{
+"src": "https://www.google.com/search?q=https://placehold.co/512x512/000000/FFFFFF%3Ftext%3DRF",
+"sizes": "512x512",
+"type": "image/png"
+}
+]
+}
