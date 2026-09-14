@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>William Zafaran</title>
+    <link rel="preload" as="image" href="media/Wave.png" fetchpriority="high">
+    <link rel="preload" as="image" href="media/Will.png" fetchpriority="high">
     <style>
         /* Custom Dark Theme based on Gumroad Profile */
         :root {
@@ -29,6 +31,39 @@
             align-items: center;
             min-height: 100vh;
             -webkit-font-smoothing: antialiased;
+        }
+
+        /* Hero Header */
+        .hero {
+            width: 100%;
+            min-height: 40vh;
+            background-image: url('media/Wave.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: var(--surface-color); /* shows instantly while Wave.png loads */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            contain: layout paint;
+            box-sizing: border-box;
+        }
+
+        .hero-logo {
+            width: clamp(160px, 30vw, 320px);
+            height: clamp(160px, 30vw, 320px);
+            object-fit: contain;
+            display: block;
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                min-height: 15vh;
+            }
+            .hero-logo {
+                width: 45vw;
+                height: 45vw;
+            }
         }
 
         header {
@@ -237,6 +272,10 @@
 </head>
 <body>
 
+    <div class="hero">
+        <img class="hero-logo" src="media/Will.png" alt="William Zafaran" width="320" height="320" fetchpriority="high" decoding="async">
+    </div>
+
     <header>
         <h1>Hi, you've reached William.</h1>
         <p class="subtitle">Which William are you looking for?</p>
@@ -246,7 +285,7 @@
         <!-- Engineer Card -->
         <a href="/engineer.html" class="card">
             <div class="image-wrapper">
-                <img src="media\Engineer.jpeg" alt="William the Engineer">
+                <img src="media/Engineer.jpeg" alt="William the Engineer">
             </div>
             <h2>William the Engineer</h2>
         </a>
@@ -254,7 +293,7 @@
         <!-- Designer Card -->
         <a href="https://williamzafaran.github.io/Portfolio/" class="card">
             <div class="image-wrapper">
-                <img src="media\Designer.jpeg" alt="William the Designer">
+                <img src="media/Designer.jpeg" alt="William the Designer">
             </div>
             <h2>William the Designer</h2>
         </a>
@@ -262,7 +301,7 @@
         <!-- Developer Card -->
         <a href="https://williamzafaran.gumroad.com/" class="card">
             <div class="image-wrapper">
-                <img src="media\Developer.jpeg" alt="William the Developer">
+                <img src="media/Developer.jpeg" alt="William the Developer">
             </div>
             <h2>William the Developer</h2>
         </a>
