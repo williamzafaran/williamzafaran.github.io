@@ -174,6 +174,13 @@
             letter-spacing: -0.01em;
         }
 
+        .custom-form .subtitle {
+            grid-column: span 2;
+            margin: -0.75rem 0 0.5rem 0;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
         .full-width {
             grid-column: span 2;
         }
@@ -219,13 +226,19 @@
             padding: 0.9rem;
             background-color: var(--border-color);
             color: var(--bg-color);
-            border: none;
+            border: 2px solid var(--border-color);
             border-radius: var(--radius-md);
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: opacity var(--transition), transform 0.1s;
+            transition: background-color var(--transition), color var(--transition), border-color var(--transition), transform 0.1s;
             margin-top: 0.5rem;
+            position: relative;
+            overflow: visible;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 52px;
         }
 
         .custom-form button:hover {
@@ -236,16 +249,34 @@
             transform: scale(0.99);
         }
 
+        .custom-form button .btn-icon {
+            display: none;
+            pointer-events: none;
+        }
+
+        .custom-form button.loading .btn-label {
+            display: none;
+        }
+
+        .custom-form button.loading .btn-icon {
+            display: inline-flex;
+        }
+
+        .custom-form button.loading,
+        .custom-form button.sent {
+            cursor: default;
+            pointer-events: none;
+        }
+
+
+        .custom-form button.sent {
+            background-color: var(--bg-color);
+            color: var(--border-color);
+            border-color: var(--border-color);
+        }
+
         .success-msg {
             display: none;
-            grid-column: span 2;
-            text-align: center;
-            color: var(--bg-color);
-            font-weight: 600;
-            padding: 0.75rem;
-            background: var(--border-color);
-            border-radius: var(--radius-md);
-            margin-top: 0.5rem;
         }
 
         /* Mobile Adjustments */
@@ -263,6 +294,7 @@
             }
             .custom-form .full-width,
             .custom-form .form-title,
+            .custom-form .subtitle,
             .custom-form button,
             .success-msg {
                 grid-column: span 1;
@@ -287,7 +319,7 @@
             <div class="image-wrapper">
                 <img src="media/Engineer.jpeg" alt="William the Engineer">
             </div>
-            <h2>William the Engineer</h2>
+            <h2>The Mechanical Engineer</h2>
         </a>
 
         <!-- Designer Card -->
@@ -295,7 +327,7 @@
             <div class="image-wrapper">
                 <img src="media/Designer.jpeg" alt="William the Designer">
             </div>
-            <h2>William the Designer</h2>
+            <h2>The Graphic Designer</h2>
         </a>
 
         <!-- Developer Card -->
@@ -303,20 +335,43 @@
             <div class="image-wrapper">
                 <img src="media/Developer.jpeg" alt="William the Developer">
             </div>
-            <h2>William the Developer</h2>
+            <h2>The Solutions Developer</h2>
         </a>
     </div>
 
     <!-- Contact Section -->
+    <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
     <div class="form-section">
         <!-- Hidden iframe prevents page redirection upon submit -->
-        <script type="text/javascript">var submitted=false;</script>
-        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) { document.getElementById('success-msg').style.display='block'; document.getElementById('contact-form').reset(); }"></iframe>
+        <script type="text/javascript">
+            var submitted = false;
+            function handleIframeLoad() {
+                if (!submitted) return;
+                submitted = false;
+                var btn = document.getElementById('submit-btn');
+                btn.classList.remove('loading');
+                btn.classList.add('sent');
+                btn.querySelector('.btn-label').textContent = 'Message sent';
+                document.getElementById('contact-form').reset();
+                setTimeout(function () {
+                    btn.classList.remove('sent');
+                    btn.querySelector('.btn-label').textContent = 'Send Message';
+                }, 2500);
+            }
+            function startLoading() {
+                submitted = true;
+                var btn = document.getElementById('submit-btn');
+                btn.classList.remove('sent');
+                btn.classList.add('loading');
+            }
+        </script>
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="handleIframeLoad()"></iframe>
 
         <!-- Custom Headless Form -->
-        <form id="contact-form" class="custom-form" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeSqLPiqxu3eQEDm912SPxSXbBBvsiYzIkUR7eBWmSX9i4Z1Q/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
+        <form id="contact-form" class="custom-form" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeSqLPiqxu3eQEDm912SPxSXbBBvsiYzIkUR7eBWmSX9i4Z1Q/formResponse" method="POST" target="hidden_iframe" onsubmit="startLoading();">
             
-            <h3 class="form-title">Contact Me</h3>
+            <h3 class="form-title">Not sure?</h3>
+            <p class="subtitle">Try leaving a message</p>
 
             <div>
                 <label for="name">Full Name</label>
@@ -333,8 +388,10 @@
                 <textarea id="message" name="entry.891600162" required></textarea>
             </div>
 
-            <button type="submit">Send Message</button>
-            <div id="success-msg" class="success-msg">Message sent successfully.</div>
+            <button type="submit" id="submit-btn">
+                <span class="btn-label">Send Message</span>
+                <iconify-icon class="btn-icon" icon="svg-spinners:3-dots-fade" width="28" height="28" style="color:#000000;"></iconify-icon>
+            </button>
         </form>
     </div>
 
